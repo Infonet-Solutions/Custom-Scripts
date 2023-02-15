@@ -210,7 +210,12 @@ for line in acl_file_lines:
         splitted = line.strip().split(" ")
         
         parsed_lines[-1].vlan = splitted[1].strip().strip("\n")
-        parsed_lines[-1].interface = splitted[-1].strip().strip("\n")
+        
+        interface = splitted[-1].strip().strip("\n")
+        if interface == "Interface:":
+            parsed_lines[-1].interface = ""
+        else:
+            parsed_lines[-1].interface = interface
 
     elif re.match("\s+Active Status", line):
         splitted = line.strip().split(" ")
