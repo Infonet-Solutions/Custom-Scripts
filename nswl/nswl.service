@@ -1,0 +1,26 @@
+[Unit]
+Description=NetScaler WebLog Service
+After=network-online.target
+
+[Service]
+#Environment Variables
+Environment=INSTANCE=nswl.domain.local
+Environment=NSWL_FOLDER=/usr/local/netscaler
+Environment=NSWL_LOG_FOLDER=/var/log/nswl/${INSTANCE}
+Environment=NETSCALER_LOG_FOLDER=/var/log/NetScaler/${INSTANCE}
+
+Type=simple
+ExecStartPre=/bin/mkdir -p ${NSWL_LOG_FOLDER}
+ExecStartPre=/bin/mkdir -p ${NETSCALER_LOG_FOLDER}
+ExecStart=${NSWL_FOLDER}/bin/nswl -start -f ${NSWL_FOLDER}/etc/${INSTANCE}.conf
+ExecStop=${NSWL_FOLDER}/bin/nswl -stop
+KillSignal=SIGINT
+TimeoutStopSec=120
+WorkingDirectory=${NSWL_LOG_FOLDER}
+
+#Restart service after 5 seconds if dies
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
