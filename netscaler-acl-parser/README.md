@@ -67,8 +67,8 @@ root@localhost:~$ # get ACL from active appliance with interactive password prom
 root@localhost:~$ python3 ~/netscaler-acl-parser.py -i -a 192.168.1.10 -u nsroot -o ~/acl.csv
 root@localhost:~$ cat ~/acl.csv
 id,name,action,hits,source ip,destination ip,source mac,protocol,source port,destination port,vlan,interface,active status,applied status,priority,nat,ttl,log status,forward session,stateful
-1,test_advanced_acl,ALLOW,4,192.168.1.1,10.1.1.1,,TCP,0,25,,Interface:,ENABLED,APPLIED,10,NO,,DISABLED,NO,NO
-12,test_advanced_acl,ALLOW,150,192.168.1.15,10.1.1.15,,TCP,0,443,,Interface:,ENABLED,APPLIED,10,NO,,DISABLED,NO,NO
+1,test_advanced_acl,ALLOW,4,192.168.1.1,10.1.1.1,,TCP,0,25,,,ENABLED,APPLIED,10,NO,,DISABLED,NO,NO
+12,test_advanced_acl,ALLOW,150,192.168.1.15,10.1.1.15,,TCP,0,443,,,ENABLED,APPLIED,10,NO,,DISABLED,NO,NO
 root@localhost:~$
 ```
 
@@ -76,8 +76,8 @@ root@localhost:~$
 root@localhost:~$ # read ACL from file, print output to console
 root@localhost:~$ python3 ~/netscaler-acl-parser.py -f ~/acl-raw.txt
 id,name,action,hits,source ip,destination ip,source mac,protocol,source port,destination port,vlan,interface,active status,applied status,priority,nat,ttl,log status,forward session,stateful
-1,test_advanced_acl,ALLOW,4,192.168.1.1,10.1.1.1,,TCP,0,25,,Interface:,ENABLED,APPLIED,10,NO,,DISABLED,NO,NO
-12,test_advanced_acl,ALLOW,150,192.168.1.15,10.1.1.15,,TCP,0,443,,Interface:,ENABLED,APPLIED,10,NO,,DISABLED,NO,NO
+1,test_advanced_acl,ALLOW,4,192.168.1.1,10.1.1.1,,TCP,0,25,,,ENABLED,APPLIED,10,NO,,DISABLED,NO,NO
+12,test_advanced_acl,ALLOW,150,192.168.1.15,10.1.1.15,,TCP,0,443,,,ENABLED,APPLIED,10,NO,,DISABLED,NO,NO
 root@localhost:~$
 ```
 
@@ -93,7 +93,7 @@ WARNING: Parser not implemented for line:  Example ACL:
     "forward_session": "NO",
     "hits": 4,
     "id": "1",
-    "interface": "Interface:",
+    "interface": "",
     "is_active": "ENABLED",
     "is_applied": "APPLIED",
     "log": "DISABLED",
@@ -114,7 +114,7 @@ WARNING: Parser not implemented for line:  Example ACL:
     "forward_session": "NO",
     "hits": 150,
     "id": "12",
-    "interface": "Interface:",
+    "interface": "",
     "is_active": "ENABLED",
     "is_applied": "APPLIED",
     "log": "DISABLED",
